@@ -4,7 +4,6 @@ pragma solidity >=0.7.0 <0.9.0;
 contract Voting {
   
   address owner;
-  //address[] public votersWhoVoted;
   string[] public candidateList;
   mapping (string => uint8) votesReceived;
   mapping(address => Voter) voters;
@@ -27,7 +26,7 @@ contract Voting {
 
   function registerVoter(address voter) external ownerOnly returns(bool) {
     require(notAlreadyRegistered(voter), "Already registered");
-    voters[voter] = Voter(block.timestamp, msg.sender, false);
+    voters[voter] = Voter(block.timestamp, voter, false);
     return true;
   }
 
